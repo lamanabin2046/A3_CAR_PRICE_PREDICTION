@@ -17,11 +17,10 @@ vehicle_df = pd.read_csv("Cars.csv")
 default_values = {
     "brand": "Maruti",
     "year": 2017,
-    "fuel": "Diesel",
+    "max_power": 82.4,
     "mileage": 19.42,
-    "max_power": 82.4
+    "fuel": "Diesel"
 }
-
 brand_cats = vehicle_df["brand"].unique().tolist()
 fuel_cat = vehicle_df["fuel"].unique().tolist()
 y_map = {0: "Cheap", 1: "Average", 2: "Expensive", 3: "Very Expensive"}
@@ -31,16 +30,14 @@ y_map = {0: "Cheap", 1: "Average", 2: "Expensive", 3: "Very Expensive"}
 # -------------------------------
 def prepare_features(brand, year, max_power, mileage, fuel):
     """
-    Prepare features as a numpy array for the MLflow model.
+    Prepare features for MLflow model
     """
-    # Use default values if input is missing
     brand = brand or default_values["brand"]
     year = year or default_values["year"]
     max_power = max_power or default_values["max_power"]
     mileage = mileage or default_values["mileage"]
     fuel = fuel or default_values["fuel"]
 
-    # Map inputs to get_X arguments (matches MLflow model)
     X, features = get_X(brand, year, km_driven=mileage, owner=0, fuel=fuel)
     return X, features
 
@@ -127,7 +124,7 @@ app.layout = dbc.Container([
 )
 def predict_price_callback(n_clicks, brand, year, max_power, mileage, fuel):
     X, _ = prepare_features(brand, year, max_power, mileage, fuel)
-    predicted_class = get_y(X)[0]  # MLflow model predicts numeric class
+    predicted_class = get_y(X)[0]
     return y_map[predicted_class]
 
 # -------------------------------

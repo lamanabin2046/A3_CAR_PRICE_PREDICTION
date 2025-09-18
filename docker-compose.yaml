@@ -1,4 +1,4 @@
-version: "3.9" # optional, can be removed in Compose v2
+version: "3.9"
 
 services:
   jupyter:
@@ -22,11 +22,14 @@ services:
       - "8050:8050"
     volumes:
       - ./code:/root/code
+      - ./_mlflow/mlruns:/mlruns # map host MLflow artifacts to container
     command: ["python3", "/root/code/app.py"]
     depends_on:
       - mlflow
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5001
     networks:
-      - default
+      - car-network
 
   mlflow:
     build:
@@ -34,7 +37,7 @@ services:
       dockerfile: mlflow.Dockerfile
     image: mlflow-car:latest
     ports:
-      - "5001:5001" # MLflow host port
+      - "5001:5001"
     volumes:
       - ./_mlflow:/mlflow
     command:
@@ -50,3 +53,9 @@ services:
         "--default-artifact-root",
         "/mlflow/mlruns",
       ]
+    networks:
+      - car-network
+
+networks:
+  car-network:
+    driver: bridge

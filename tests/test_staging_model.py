@@ -1,46 +1,53 @@
 """
-This file tests the ML model in Staging.
+This file tests the MLflow model in Staging.
 If all tests pass, the model can be promoted to Production automatically.
 """
 
-from utils import load_mlflow
+import pytest
 import numpy as np
 import pandas as pd
-import pytest
+import mlflow.pyfunc
 
-# Stage of the model to test
-stage = "Staging"
+# MLflow server and model info
+MLFLOW_URI = "http://192.41.170.142:5001"  # replace with your MLflow server IP
+MODEL_NAME = "st125985-a3-model"
+STAGE = "Staging"
 
+# ------------------------------
+# Helper function to load model
+# ------------------------------
+def load_mlflow_model(stage=STAGE):
+    mlflow.set_tracking_uri(MLFLOW_URI)
+    model_uri = f"models:/{MODEL_NAME}/{stage}"
+    model = mlflow.pyfunc.load_model(model_uri)
+    return model
 
-# Test 1: Load the model
+# ------------------------------
+# Test 1: Model loads correctly
+# ------------------------------
 def test_load_model():
-    model = load_mlflow(stage=stage)
-    assert model, "Model could not be loaded from MLflow"
+    model = load_mlflow_model()
+    assert model is not None, "Failed to load model from MLflow"
 
-
-# Test 2: Test model input
+# ------------------------------
+# Test 2: Model accepts input
+# ------------------------------
 @pytest.mark.dependency(depends=["test_load_model"])
 def test_model_input():
-    model = load_mlflow(stage=stage)
-    # Create dummy input with 2 features
-    X = np.array([1, 2]).reshape(-1, 2)
-    X = pd.DataFrame(X, columns=["x1", "x2"])
-    pred = model.predict(X)  # type: ignore
-    assert pred is not None, "Model did not produce any prediction"
+    model = load_mlflow_model()
+    # Dummy input matching your feature vector length (35 features)
+    X_dummy = np.zeros((1, 35))
+    X_dummy = pd.DataFrame(X_dummy, columns=[f"feature_{i}" for i in range(35)])
+    pred = model.predict(X_dummy)
+    assert pred is not None, "Model did not produce a prediction"
 
-
-# Test 3: Test model output shape
+# ------------------------------
+# Test 3: Output shape
+# ------------------------------
 @pytest.mark.dependency(depends=["test_model_input"])
-def test_model_output():
-    model = load_mlflow(stage=stage)
-    X = np.array([1, 2]).reshape(-1, 2)
-    X = pd.DataFrame(X, columns=["x1", "x2"])
-    pred = model.predict(X)  # type: ignore
-    assert pred.shape == (1, 1), f"Prediction shape mismatch: {pred.shape}"
-
-
-# Test 4: Test model coefficients
-@pytest.mark.dependency(depends=["test_load_model"])
-def test_model_coeff():
-    model = load_mlflow(stage=stage)
-    assert model.coef_.shape == (1, 2), f"Coefficient shape mismatch: {model.coef_.shape}"  # type: ignore
+def test_model_output_shape():
+    model = load_mlflow_model()
+    X_dummy = np.zeros((3, 35))  # 3 samples
+    X_dummy = pd.DataFrame(X_dummy, columns=[f"feature_{i}" for i in range(35)])
+    pred = model.predict(X_dummy)
+    assert len(pred) == 3, f"Expected 3 predictions, got {len(pred)}"
