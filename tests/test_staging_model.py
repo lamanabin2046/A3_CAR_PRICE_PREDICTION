@@ -1,6 +1,5 @@
 """
-This file tests the MLflow model in Staging.
-If all tests pass, the model can be promoted to Production automatically.
+This file tests the MLflow model directly (Production or Staging).
 """
 
 import pytest
@@ -8,12 +7,12 @@ import numpy as np
 import pandas as pd
 import mlflow.pyfunc
 
-
-
+# ------------------------------
 # MLflow server and model info
-MLFLOW_URI = "http://192.41.170.142:5001"  # replace with your MLflow server IP
+# ------------------------------
+MLFLOW_URI = "http://mlflow:5001"  # Use Docker service name if inside Docker
 MODEL_NAME = "st125985-a3-model"
-STAGE = "Staging"
+STAGE = "Production"  # or "Staging"
 
 # ------------------------------
 # Helper function to load model
