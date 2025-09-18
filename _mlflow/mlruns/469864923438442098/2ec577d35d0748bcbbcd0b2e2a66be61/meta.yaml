@@ -1,0 +1,14 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/2ec577d35d0748bcbbcd0b2e2a66be61/artifacts
+end_time: 1758125598574
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: active
+run_id: 2ec577d35d0748bcbbcd0b2e2a66be61
+run_name: Ridge-minibatch-alpha-0.001
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758125587285
+status: 3
+tags: []
+user_id: root

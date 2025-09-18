@@ -1,0 +1,15 @@
+artifact_uri: /mlflow/mlruns/309704451189977506/606e96fe73c948fdab595e3071fb2e06/artifacts
+deleted_time: 1758126804754
+end_time: 1757821309662
+entry_point_name: ''
+experiment_id: '309704451189977506'
+lifecycle_stage: deleted
+run_id: 606e96fe73c948fdab595e3071fb2e06
+run_name: Normal-sto-alpha-0.01
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757821303225
+status: 3
+tags: []
+user_id: root

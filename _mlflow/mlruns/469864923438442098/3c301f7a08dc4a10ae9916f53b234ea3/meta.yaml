@@ -1,0 +1,14 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/3c301f7a08dc4a10ae9916f53b234ea3/artifacts
+end_time: 1758165132475
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: active
+run_id: 3c301f7a08dc4a10ae9916f53b234ea3
+run_name: nimble-kite-553
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758165125192
+status: 3
+tags: []
+user_id: root

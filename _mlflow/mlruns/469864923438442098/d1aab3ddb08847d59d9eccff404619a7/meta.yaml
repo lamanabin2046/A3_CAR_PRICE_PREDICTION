@@ -1,0 +1,14 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/d1aab3ddb08847d59d9eccff404619a7/artifacts
+end_time: 1758163262388
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: active
+run_id: d1aab3ddb08847d59d9eccff404619a7
+run_name: reg-Normal-method-minibatch
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758163186110
+status: 3
+tags: []
+user_id: root

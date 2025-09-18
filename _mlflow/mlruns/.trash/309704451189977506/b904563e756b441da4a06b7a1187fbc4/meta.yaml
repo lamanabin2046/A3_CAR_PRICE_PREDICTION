@@ -1,0 +1,15 @@
+artifact_uri: /mlflow/mlruns/309704451189977506/b904563e756b441da4a06b7a1187fbc4/artifacts
+deleted_time: 1758126804754
+end_time: 1757823748638
+entry_point_name: ''
+experiment_id: '309704451189977506'
+lifecycle_stage: deleted
+run_id: b904563e756b441da4a06b7a1187fbc4
+run_name: Ridge-sto-alpha-0.0001
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757823746062
+status: 3
+tags: []
+user_id: root

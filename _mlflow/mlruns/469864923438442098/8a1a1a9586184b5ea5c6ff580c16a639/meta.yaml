@@ -1,0 +1,15 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/8a1a1a9586184b5ea5c6ff580c16a639/artifacts
+deleted_time: 1758132910728
+end_time: 1758131262941
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: deleted
+run_id: 8a1a1a9586184b5ea5c6ff580c16a639
+run_name: bold-whale-428
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758131262295
+status: 3
+tags: []
+user_id: root

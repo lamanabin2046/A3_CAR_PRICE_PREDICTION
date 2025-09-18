@@ -1,0 +1,15 @@
+artifact_uri: /mlflow/mlruns/309704451189977506/65094f30c1524b3e8f1e1b7635702692/artifacts
+deleted_time: 1758126804754
+end_time: 1757822098818
+entry_point_name: ''
+experiment_id: '309704451189977506'
+lifecycle_stage: deleted
+run_id: 65094f30c1524b3e8f1e1b7635702692
+run_name: Normal-batch-alpha-0.001
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757822071094
+status: 3
+tags: []
+user_id: root

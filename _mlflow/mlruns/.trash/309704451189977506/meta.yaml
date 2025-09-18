@@ -1,0 +1,7 @@
+artifact_location: /mlflow/mlruns/309704451189977506
+creation_time: 1757819181808
+experiment_id: '309704451189977506'
+last_update_time: 1758126804754
+lifecycle_stage: deleted
+name: car_price_prediction
+tags: {}

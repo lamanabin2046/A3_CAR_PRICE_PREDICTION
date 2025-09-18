@@ -1,0 +1,25 @@
+# Use Python 3.10.12 on Bookworm
+FROM python:3.10.12-bookworm
+
+# Set working directory
+WORKDIR /root/code
+
+# Copy requirements first to leverage caching
+COPY requirements.txt .
+
+# Install dependencies including JupyterLab
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir jupyterlab==4.3.2
+
+# Copy your source code
+COPY ./code /root/code
+
+# Expose JupyterLab port
+EXPOSE 8888
+
+# Set password environment variable
+ENV JUPYTER_PASSWORD_HASH=argon2:$argon2id$v=19$m=10240,t=10,p=8$btpQFdm0YERLMLZl1iyFnQ$DlptzSUOs7ut+59YPk84ydjk2EbCOLewBRR12hTOrp4
+
+# Start JupyterLab
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--ServerApp.password=''", "--ServerApp.token=''"]
+

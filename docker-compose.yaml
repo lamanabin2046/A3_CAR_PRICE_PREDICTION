@@ -1,0 +1,52 @@
+version: "3.9" # optional, can be removed in Compose v2
+
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyterlab
+    image: a3_car_price_prediction_jupyter:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./code:/root/code
+    command: >
+      jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token='' --NotebookApp.password='' --no-browser
+
+  dash:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: a3-dash-car:latest
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./code:/root/code
+    command: ["python3", "/root/code/app.py"]
+    depends_on:
+      - mlflow
+    networks:
+      - default
+
+  mlflow:
+    build:
+      context: .
+      dockerfile: mlflow.Dockerfile
+    image: mlflow-car:latest
+    ports:
+      - "5001:5001" # MLflow host port
+    volumes:
+      - ./_mlflow:/mlflow
+    command:
+      [
+        "mlflow",
+        "server",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "5001",
+        "--backend-store-uri",
+        "file:/mlflow/mlruns",
+        "--default-artifact-root",
+        "/mlflow/mlruns",
+      ]

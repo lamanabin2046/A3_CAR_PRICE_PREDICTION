@@ -1,0 +1,14 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/6fcc71f6347d45d790535c2af062307a/artifacts
+end_time: 1758165066653
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: active
+run_id: 6fcc71f6347d45d790535c2af062307a
+run_name: trusting-jay-163
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758165066482
+status: 4
+tags: []
+user_id: root

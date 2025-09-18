@@ -1,0 +1,15 @@
+artifact_uri: /mlflow/mlruns/309704451189977506/b0308ec41b5c4c32be1b88e4376c22c6/artifacts
+deleted_time: 1758126804754
+end_time: 1757822005499
+entry_point_name: ''
+experiment_id: '309704451189977506'
+lifecycle_stage: deleted
+run_id: b0308ec41b5c4c32be1b88e4376c22c6
+run_name: Ridge-batch-alpha-0.01
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757821971017
+status: 3
+tags: []
+user_id: root
