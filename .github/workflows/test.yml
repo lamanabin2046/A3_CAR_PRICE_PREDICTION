@@ -26,4 +26,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run unit tests
-        run: pytest tests/
+        run: |
+          # Add project root to PYTHONPATH so code/ is importable
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          pytest tests/

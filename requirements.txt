@@ -12,3 +12,5 @@ jupyter>=1.0.0
 plotly==5.18.0
 jupyterlab==4.3.2
 pytest==7.4.2
+
+dill

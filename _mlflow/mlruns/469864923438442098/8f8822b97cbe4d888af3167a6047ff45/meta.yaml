@@ -1,0 +1,14 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/8f8822b97cbe4d888af3167a6047ff45/artifacts
+end_time: 1758211903356
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: active
+run_id: 8f8822b97cbe4d888af3167a6047ff45
+run_name: reg-Ridge-method-minibatch
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758211859382
+status: 3
+tags: []
+user_id: root

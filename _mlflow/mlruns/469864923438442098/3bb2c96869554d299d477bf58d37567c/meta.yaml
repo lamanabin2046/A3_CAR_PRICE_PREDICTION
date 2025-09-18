@@ -1,0 +1,14 @@
+artifact_uri: /mlflow/mlruns/469864923438442098/3bb2c96869554d299d477bf58d37567c/artifacts
+end_time: 1758211923725
+entry_point_name: ''
+experiment_id: '469864923438442098'
+lifecycle_stage: active
+run_id: 3bb2c96869554d299d477bf58d37567c
+run_name: reg-Ridge-method-sto
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758211903418
+status: 3
+tags: []
+user_id: root
