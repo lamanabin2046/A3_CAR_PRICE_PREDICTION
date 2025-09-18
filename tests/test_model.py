@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from model import get_y, get_X, predict_selling_price
+from code.model import get_y, get_X, predict_selling_price
 
 # Labels for prediction
 labels = ["Cheap", "Average", "Expensive", "Very Expensive"]
