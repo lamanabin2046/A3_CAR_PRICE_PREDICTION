@@ -10,6 +10,8 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+ENV PYTHONPATH="${PYTHONPATH}:/root/code"
+
 
 
 # Copy your source code

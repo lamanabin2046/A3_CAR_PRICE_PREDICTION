@@ -5,14 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.jupyterlab
-    image: a3_car_price_prediction_jupyter:latest
+    image: a3_car_jupyter:latest
     ports:
       - "8888:8888"
     volumes:
       - ./code:/root/code
-
     command: >
       jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token='' --NotebookApp.password='' --no-browser
+    networks:
+      - car-network
 
   dash:
     build:
@@ -23,14 +24,14 @@ services:
       - "8050:8050"
     volumes:
       - ./code:/root/code
-      - ./_mlflow/mlruns:/mlruns # map host MLflow artifacts to container
+      - ./_mlflow/mlruns:/mlflow/mlruns
     command: ["python3", "/root/code/app.py"]
     depends_on:
       - mlflow
+      - postgres
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5001
       - PYTHONPATH=/root/code
-      
     networks:
       - car-network
 
@@ -42,7 +43,9 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - ./_mlflow:/mlflow
+      - ./_mlflow/mlruns:/mlflow/mlruns
+    depends_on:
+      - postgres
     command:
       [
         "mlflow",
@@ -52,10 +55,21 @@ services:
         "--port",
         "5001",
         "--backend-store-uri",
-        "file:/mlflow/mlruns",
+        "postgresql://mlflow:mlflow@postgres:5432/mlflow",
         "--default-artifact-root",
         "/mlflow/mlruns",
       ]
+    networks:
+      - car-network
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: mlflow
+      POSTGRES_DB: mlflow
+    volumes:
+      - ./_mlflow/db:/var/lib/postgresql/data
     networks:
       - car-network
 
