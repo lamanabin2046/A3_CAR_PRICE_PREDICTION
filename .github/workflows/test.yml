@@ -9,6 +9,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      MLFLOW_USERNAME: ${{ secrets.MLFLOW_USERNAME }}
+      MLFLOW_PASSWORD: ${{ secrets.MLFLOW_PASSWORD }}
+      MODEL_NAME: ${{ secrets.MODEL_NAME }}
+      RUN_ID: ${{ secrets.RUN_ID }}
 
     steps:
       - name: Checkout code
