@@ -3,7 +3,7 @@ import numpy as np
 from model import get_X, load_model  # MLflow model
 
 # Example input features: brand, year, max_power, mileage, fuel
-feature_vals = ['Maruti', 2017, 82.4, 19.42, 'Diesel']
+feature_vals = [82.4, 2017, 19.42, "Diesel", "Maruti"]
 
 def test_model_input_shape():
     """
