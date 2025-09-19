@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from model import get_X, model  # MLflow model
+from model import get_X, load_model  # MLflow model
 
 # Example input features: brand, year, max_power, mileage, fuel
 feature_vals = ['Maruti', 2017, 82.4, 19.42, 'Diesel']
@@ -23,6 +23,7 @@ def test_model_output_shape():
     Test that the raw model output has the expected shape: (1,)
     """
     X = get_X(*feature_vals)
+    model = load_model()
     
     y_pred = model.predict(X)  # raw numeric prediction
     assert isinstance(y_pred, np.ndarray), f"Expected np.ndarray, got {type(y_pred)}"
