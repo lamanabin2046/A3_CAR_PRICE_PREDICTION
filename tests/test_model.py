@@ -1,23 +1,29 @@
 import pytest
 import numpy as np
-from code.model import get_y, get_X, predict_selling_price  # note the 'code.' prefix
+from model import get_X, model  # MLflow model
 
-# Labels for prediction
-labels = ["Cheap", "Average", "Expensive", "Very Expensive"]
+# Example input features: brand, year, max_power, mileage, fuel
+feature_vals = ['Maruti', 2017, 82.4, 19.42, 'Diesel']
 
 def test_model_input_shape():
-    X = np.zeros((1, 35))
-    try:
-        y_pred = get_y(X)
-    except Exception as e:
-        pytest.fail(f"Model failed on valid input: {e}")
+    """
+    Test that the feature vector returned by get_X has the expected shape and type.
+    Since brand is one-hot encoded, the total features should be 35.
+    """
+    X = get_X(*feature_vals)
+    
+    # Check the shape (1 row, 35 features)
+    assert X.shape == (1, 35), f"Expected shape (1, 35), got {X.shape}"
+    
+    # Check the dtype is numeric
+    assert X.dtype == np.float64 or X.dtype == np.float32, f"Expected numeric dtype, got {X.dtype}"
 
 def test_model_output_shape():
-    X = np.zeros((5, 35))
-    y_pred = get_y(X)
-    assert len(y_pred) == 5, f"Expected 5 predictions, got {len(y_pred)}"
-
-def test_predict_selling_price():
-    feature_vals = ['Maruti', 2017, 82.4, 0, 'Diesel']
-    output = predict_selling_price(*feature_vals)
-    assert output[0] in labels
+    """
+    Test that the raw model output has the expected shape: (1,)
+    """
+    X = get_X(*feature_vals)
+    
+    y_pred = model.predict(X)  # raw numeric prediction
+    assert isinstance(y_pred, np.ndarray), f"Expected np.ndarray, got {type(y_pred)}"
+    assert y_pred.shape == (1,), f"Expected shape (1,), got {y_pred.shape}"
