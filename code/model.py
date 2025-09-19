@@ -15,9 +15,13 @@ logging.basicConfig(level=logging.INFO)
 # --------------------------
 # Load scaler and encoders
 # --------------------------
-SCALAR_PATH = "Model/car-scaling.model"
-BRAND_ENCODER_PATH = "Model/car_brand_encoder.model"
-FUEL_ENCODER_PATH = "Model/car_fuel_encoder.model"
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+SCALAR_PATH = os.path.join(BASE_DIR, "Model", "car-scaling.model")
+BRAND_ENCODER_PATH = os.path.join(BASE_DIR, "Model", "car_brand_encoder.model")
+FUEL_ENCODER_PATH = os.path.join(BASE_DIR, "Model", "car_fuel_encoder.model")
 
 scaler = pickle.load(open(SCALAR_PATH, "rb"))
 brand_encoder = pickle.load(open(BRAND_ENCODER_PATH, "rb"))  # OneHotEncoder
