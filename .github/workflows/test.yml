@@ -201,11 +201,11 @@ jobs:
           host: ${{ vars.HOST }} # final server: ml.brain.cs.ait.ac.th
           username: ${{ secrets.USERNAME }} # st125985
           key: ${{ secrets.SSH_PRIVATE_KEY }} # private key secret
-          passphrase: ${{ secrets.PASSPHRASE }}
+          # passphrase: ${{ secrets.PASSPHRASE }}
           proxy_host: ${{ vars.PROXY_HOST }} # jump server: bazooka.cs.ait.ac.th
           proxy_username: ${{ secrets.USERNAME }}
           proxy_key: ${{ secrets.SSH_PRIVATE_KEY }} # use same key for proxy
-          proxy_passphrase: ${{ secrets.PASSPHRASE }}
+          # proxy_passphrase: ${{ secrets.PASSPHRASE }}
 
           script: |
             cd st125985
