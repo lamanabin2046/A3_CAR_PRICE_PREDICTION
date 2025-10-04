@@ -12,8 +12,8 @@ services:
       - ./code:/root/code
     environment:
       MLFLOW_TRACKING_URI: "https://mlflow.ml.brain.cs.ait.ac.th/"
-      MLFLOW_TRACKING_USERNAME: "admin"
-      MLFLOW_TRACKING_PASSWORD: "password"
+      MLFLOW_USERNAME: "admin"
+      MLFLOW_PASSWORD: "password"
     command: >
       jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token='' --NotebookApp.password='' --no-browser
     networks:
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: a3-dash-car:latest
+    image: a3_car_price_prediction:latest
     ports:
       - "8060:80"
     volumes:
