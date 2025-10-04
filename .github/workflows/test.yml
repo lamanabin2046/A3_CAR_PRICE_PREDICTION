@@ -206,6 +206,6 @@ jobs:
           proxy_username: ${{ secrets.USERNAME }}
           proxy_key: ${{ secrets.SSH_PRIVATE_KEY }} # use same key for proxy
           script: |
-            echo "Deploying branch: ${{ github.ref_name }}"
-            docker compose -f st125985/docker-compose-a3.yaml down
-            docker compose -f st125985/docker-compose-a3.yaml up -d
+            cd st125985
+            tag=${{ github.ref_name }} docker compose down
+            tag=${{ github.ref_name }} docker compose up -d
