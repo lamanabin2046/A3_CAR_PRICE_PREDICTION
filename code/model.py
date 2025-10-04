@@ -37,7 +37,7 @@ def get_X(max_power, year, mileage, fuel, brand):
 # Load MLflow model
 # --------------------------
 def load_model():
-    MLFLOW_URI = os.getenv("MLFLOW_TRACKING_URI", "http://mlflow.ml.brain.cs.ait.ac.th/")
+    MLFLOW_URI = os.getenv("MLFLOW_TRACKING_URI", "https://mlflow.ml.brain.cs.ait.ac.th/")
     mlflow.set_tracking_uri(MLFLOW_URI)
 
     # Optional: support username/password from env
