@@ -1,3 +1,49 @@
+# version: "3.9"
+
+# services:
+#   jupyter:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.jupyterlab
+#     image: a3_car_jupyter:latest
+#     ports:
+#       - "8889:8888"
+#     volumes:
+#       - ./code:/root/code
+#     environment:
+#       MLFLOW_TRACKING_URI: "https://mlflow.ml.brain.cs.ait.ac.th/"
+#       MLFLOW_USERNAME: "admin"
+#       MLFLOW_PASSWORD: "password"
+#     command: >
+#       jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token='' --NotebookApp.password='' --no-browser
+#     networks:
+#       - car-network
+
+#   dash:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     image: a3_car_price:latest
+#     ports:
+#       - "8060:80"
+#     volumes:
+#       - ./code:/root/code
+#       - ./_mlflow/mlruns:/mlflow/mlruns
+#     environment:
+#       MLFLOW_TRACKING_URI: "${MLFLOW_TRACKING_URI}"
+#       MLFLOW_USERNAME: "${MLFLOW_USERNAME}"
+#       MLFLOW_PASSWORD: "${MLFLOW_PASSWORD}"
+#       MODEL_NAME: "${MODEL_NAME}"
+#       RUN_ID: "${RUN_ID}"
+#       PYTHONPATH: "/root/code"
+#     command: ["python3", "/root/code/app.py"]
+#     networks:
+#       - car-network
+
+# networks:
+#   car-network:
+#     driver: bridge
+
 version: "3.9"
 
 services:
@@ -30,11 +76,11 @@ services:
       - ./code:/root/code
       - ./_mlflow/mlruns:/mlflow/mlruns
     environment:
-      MLFLOW_TRACKING_URI: "${MLFLOW_TRACKING_URI}"
-      MLFLOW_USERNAME: "${MLFLOW_USERNAME}"
-      MLFLOW_PASSWORD: "${MLFLOW_PASSWORD}"
-      MODEL_NAME: "${MODEL_NAME}"
-      RUN_ID: "${RUN_ID}"
+      MLFLOW_TRACKING_URI: "https://mlflow.ml.brain.cs.ait.ac.th/"
+      MLFLOW_USERNAME: "admin"
+      MLFLOW_PASSWORD: "password"
+      MODEL_NAME: "st125985-a3-model"
+      RUN_ID: "6455edd4b0324ef48854fac452346c69"
       PYTHONPATH: "/root/code"
     command: ["python3", "/root/code/app.py"]
     networks:
