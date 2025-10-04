@@ -117,38 +117,39 @@ def load_model():
     MLFLOW_URI = os.getenv("MLFLOW_TRACKING_URI", "https://mlflow.ml.brain.cs.ait.ac.th/")
     mlflow.set_tracking_uri(MLFLOW_URI)
 
-    username = os.getenv("MLFLOW_USERNAME")
-    password = os.getenv("MLFLOW_PASSWORD")
+    username = os.getenv("MLFLOW_TRACKING_USERNAME")
+    password = os.getenv("MLFLOW_TRACKING_PASSWORD")
     if username and password:
         os.environ["MLFLOW_TRACKING_USERNAME"] = username
         os.environ["MLFLOW_TRACKING_PASSWORD"] = password
-
-    MODEL_NAME = os.getenv("MODEL_NAME", "st125985-a3-model")
-    RUN_ID = os.getenv("RUN_ID", None)
-
-    if RUN_ID:
-        model_uri = f"runs:/{RUN_ID}/model"
+        
+    if username and password:
+        logging.info(f"Using MLflow credentials from environment: {username}/*****")
     else:
-        model_uri = f"models:/{MODEL_NAME}/Production"
+        logging.warning("No MLflow credentials found")
 
-    for attempt in range(10):
+    run_id = os.getenv("RUN_ID")
+    model_name = os.getenv("MODEL_NAME", "st125985-a3-model")
+    model_uri = f"runs:/{run_id}/model" if run_id else f"models:/{model_name}/Production"
+
+    for attempt in range(5):
         try:
-            logging.info(f"Loading MLflow model from {model_uri} (attempt {attempt + 1}/10)")
+            logging.info(f"Loading MLflow model from {model_uri} (attempt {attempt+1}/5)")
             model = mlflow.pyfunc.load_model(model_uri)
-            logging.info("✅ Model loaded successfully")
+            logging.info("✅ MLflow model loaded successfully")
             return model
         except Exception as e:
-            logging.warning(f"Attempt {attempt + 1} failed: {e}")
+            logging.warning(f"Attempt {attempt+1} failed: {type(e).__name__}: {e}")
             time.sleep(3)
 
-    raise RuntimeError(f"Failed to load MLflow model after 10 attempts. Tried URI: {model_uri}")
+    raise RuntimeError(f"Failed to load MLflow model after 5 attempts. Tried URI: {model_uri}")
 
-# Load the model once at import
+# Load model at import
 try:
     mlflow_model = load_model()
 except Exception as e:
     logging.error(f"MLflow model could not be loaded: {e}")
-    mlflow_model = None  # allow app to start, but prediction will fail
+    mlflow_model = None
 
 # --------------------------
 # Predict
