@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.jupyterlab
     image: a3_car_jupyter:latest
     ports:
-      - "8888:8888"
+      - "8889:8888"
     volumes:
       - ./code:/root/code
     environment:
@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile
     image: a3-dash-car:latest
     ports:
-      - "8050:8050"
+      - "8060:80"
     volumes:
       - ./code:/root/code
       - ./_mlflow/mlruns:/mlflow/mlruns
