@@ -120,8 +120,8 @@ def _load_mlflow_model():
     username = os.getenv("MLFLOW_USERNAME")
     password = os.getenv("MLFLOW_PASSWORD")
     if username and password:
-        os.environ["MLFLOW_USERNAME"] = username
-        os.environ["MLFLOW_PASSWORD"] = password
+        os.environ["MLFLOW_TRACKING_USERNAME"] = username
+        os.environ["MLFLOW_TRACKING_PASSWORD"] = password
 
     MODEL_NAME = os.getenv("MODEL_NAME", "st125985-a3-model")
     RUN_ID = os.getenv("RUN_ID", None)
