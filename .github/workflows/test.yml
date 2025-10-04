@@ -59,17 +59,13 @@
 #         run: |
 #           docker push nabin85/a3_car_price_prediction:latest
 
-
-
 # name: CI/CD Pipeline
-
 
 # on:
 #  push:
 #    branches: [main]
 #  pull_request:
 #    branches: [main]
-
 
 # jobs:
 #  test:
@@ -84,12 +80,10 @@
 #      - name: Checkout code
 #        uses: actions/checkout@v3
 
-
 #      - name: Set up Python
 #        uses: actions/setup-python@v4
 #        with:
 #          python-version: "3.11"
-
 
 #      - name: Install dependencies
 #        run: |
@@ -97,12 +91,10 @@
 #          pip install -r requirements.txt
 #          pip install pytest
 
-
 #      - name: Run unit tests
 #        run: |
 #          export PYTHONPATH=$(pwd)/code
 #          python -m pytest tests/ -v
-
 
 #  deploy:
 #    needs: test
@@ -114,18 +106,15 @@
 #      - name: Checkout code
 #        uses: actions/checkout@v3
 
-
 #      - name: Log in to Docker Hub
 #        uses: docker/login-action@v2
 #        with:
 #          username: ${{ secrets.DOCKERHUB_USERNAME }}
 #          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-
 #      - name: Build Docker image
 #        run: |
 #          docker build -t nabin85/a3_car_price_prediction:latest .
-
 
 #      - name: Push Docker image
 #        run: |
@@ -143,8 +132,6 @@
 #          script: |
 #            tag=${{ github.ref_name }} docker compose -f st125985/docker-compose-a3.yaml down
 #            tag=${{ github.ref_name }} docker compose -f st125985/docker-compose-a3.yaml up -d
-
-
 
 name: CI/CD Pipeline
 
@@ -210,14 +197,12 @@ jobs:
       - name: Deploy to AIT server via ProxyJump
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ vars.HOST }}                  # final server: ml.brain.cs.ait.ac.th
-          username: ${{ secrets.USERNAME }}       # st125985
-          key: ${{ secrets.KEY }}                 # PRIVATE SSH KEY
-          # passphrase: ${{ secrets.PASSPHRASE }}   # optional, only if key has passphrase
-          proxy_host: ${{ vars.PROXY_HOST }}      # jump server: bazooka.cs.ait.ac.th
-          proxy_username: ${{ secrets.USERNAME }}
-          proxy_key: ${{ secrets.KEY }}
-          proxy_passphrase: ${{ secrets.PASSPHRASE }} # optional
+          host: ${{ secrets.SERVER_HOST }} # final server: ml.brain.cs.ait.ac.th
+          username: ${{ secrets.SERVER_USER }} # st125985
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # private key secret
+          proxy_host: ${{ secrets.PROXY_HOST }} # jump server: bazooka.cs.ait.ac.th
+          proxy_username: ${{ secrets.SERVER_USER }}
+          proxy_key: ${{ secrets.SSH_PRIVATE_KEY }} # use same key for proxy
           script: |
             echo "Deploying branch: ${{ github.ref_name }}"
             docker compose -f st125985/docker-compose-a3.yaml down
