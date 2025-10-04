@@ -54,7 +54,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t nabin85/a3_car_price_prediction:latest .
+          docker build -t nabin85/a3_car_price:latest .
 
       - name: Push Docker image
         run: |
