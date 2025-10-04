@@ -58,7 +58,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push nabin85/a3_car_price_prediction:latest
+          docker push nabin85/a3_car_price:latest
 
       - name: Deploy to AIT server via ProxyJump
         uses: appleboy/ssh-action@v1.0.0

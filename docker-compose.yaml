@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: a3_car_price_prediction:latest
+    image: a3_car_price:latest
     ports:
       - "8060:80"
     volumes:
