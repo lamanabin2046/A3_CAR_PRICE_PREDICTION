@@ -113,7 +113,7 @@ def get_X(max_power, year, mileage, fuel, brand):
 # --------------------------
 # Load MLflow model (once)
 # --------------------------
-def _load_mlflow_model():
+def load_model():
     MLFLOW_URI = os.getenv("MLFLOW_TRACKING_URI", "https://mlflow.ml.brain.cs.ait.ac.th/")
     mlflow.set_tracking_uri(MLFLOW_URI)
 
@@ -145,7 +145,7 @@ def _load_mlflow_model():
 
 # Load the model once at import
 try:
-    mlflow_model = _load_mlflow_model()
+    mlflow_model = load_model()
 except Exception as e:
     logging.error(f"MLflow model could not be loaded: {e}")
     mlflow_model = None  # allow app to start, but prediction will fail
