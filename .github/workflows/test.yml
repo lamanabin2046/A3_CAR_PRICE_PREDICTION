@@ -205,6 +205,8 @@ jobs:
           proxy_host: ${{ vars.PROXY_HOST }} # jump server: bazooka.cs.ait.ac.th
           proxy_username: ${{ secrets.USERNAME }}
           proxy_key: ${{ secrets.SSH_PRIVATE_KEY }} # use same key for proxy
+          proxy_passphrase: ${{ secrets.PASSPHRASE }}
+
           script: |
             cd st125985
             tag=${{ github.ref_name }} docker compose down
