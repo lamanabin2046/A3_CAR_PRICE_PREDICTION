@@ -12,11 +12,17 @@ services:
       - ./code:/root/code
     env_file:
       - .env
-    command: >
-      jupyter lab --ip=0.0.0.0 --port=8888 --allow-root \
-      --NotebookApp.token='' \
-      --NotebookApp.password='${JUPYTER_PASSWORD_HASH}' \
-      --no-browser
+    working_dir: /root/code
+    command:
+      - jupyter
+      - lab
+      - --ip=0.0.0.0
+      - --port=8888
+      - --allow-root
+      - --notebook-dir=/root/code
+      - --ServerApp.token='' # disable token
+      - --ServerApp.password='' # disable password
+      - --no-browser
     networks:
       - car-network
 
@@ -32,6 +38,7 @@ services:
       - ./_mlflow/mlruns:/mlflow/mlruns
     env_file:
       - .env
+    working_dir: /root/code
     command: ["python3", "/root/code/app.py"]
     networks:
       - car-network
